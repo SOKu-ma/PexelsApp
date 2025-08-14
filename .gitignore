@@ -1,0 +1,158 @@
+# Xcode
+#
+# gitignore contributors: remember to update Global/Xcode.gitignore, Objective-C.gitignore & Swift.gitignore
+
+## User settings
+xcuserdata/
+
+## Obj-C/Swift specific
+*.hmap
+
+## App packaging
+*.ipa
+*.dSYM.zip
+*.dSYM
+
+## Playgrounds
+timeline.xctimeline
+playground.xcworkspace
+
+# Swift Package Manager
+#
+# Add this line if you want to avoid checking in source code from Swift Package Manager dependencies.
+# Packages/
+# Package.pins
+# Package.resolved
+# *.xcodeproj
+#
+# Xcode automatically generates this directory with a .xcworkspacedata file and xcuserdata
+# hence it is not needed unless you have added a package configuration file to your project
+# .swiftpm
+
+.build/
+
+# CocoaPods
+#
+# We recommend against adding the Pods directory to your .gitignore. However
+# you should judge for yourself, the pros and cons are mentioned at:
+# https://guides.cocoapods.org/using/using-cocoapods.html#should-i-check-the-pods-directory-into-source-control
+#
+# Pods/
+#
+# Add this line if you want to avoid checking in source code from the Xcode workspace
+# *.xcworkspace
+
+# Carthage
+#
+# Add this line if you want to avoid checking in source code from Carthage dependencies.
+# Carthage/Checkouts
+
+Carthage/Build/
+
+# fastlane
+#
+# It is recommended to not store the screenshots in the git repo.
+# Instead, use fastlane to re-generate the screenshots whenever they are needed.
+# For more information about the recommended setup visit:
+# https://docs.fastlane.tools/best-practices/source-control/#source-control
+
+fastlane/report.xml
+fastlane/Preview.html
+fastlane/screenshots/**/*.png
+fastlane/test_output
+
+# --------
+# macOS
+# --------
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# --------
+# Xcode / Swift
+# --------
+xcuserdata/
+*.xcuserstate
+# 共有したいのは Scheme のみ。デバッガ設定は除外
+xcshareddata/xcdebugger/
+
+# 派生成果物
+*.hmap
+*.ipa
+*.dSYM.zip
+*.dSYM
+*.xcresult
+
+# Playgrounds
+timeline.xctimeline
+playground.xcworkspace
+
+# Derived data（通常はグローバルで除外するが、念のため）
+DerivedData/
+
+# --------
+# Swift Package Manager
+# --------
+.build/
+
+# 一般的なアプリは Package.resolved をコミットするのが安定
+#（外したい場合は下をアンコメント）
+# Package.resolved
+
+# Xcode が自動生成する SPM ワークスペース
+.swiftpm/
+
+# --------
+# 依存管理（任意）
+# --------
+# CocoaPods
+# Pods/
+# *.xcworkspace
+
+# Carthage
+Carthage/Build/
+# Carthage/Checkouts
+
+# --------
+# Lint / Format / ツール
+# --------
+# SwiftLint キャッシュ
+.swiftlint_cache
+
+# Mint（使う場合）
+Mint/
+.mint/
+
+# --------
+# エディタ設定
+# --------
+# VSCode
+.vscode/
+# JetBrains
+.idea/
+
+# --------
+# fastlane
+# --------
+fastlane/report.xml
+fastlane/Preview.html
+fastlane/screenshots/**/*.png
+fastlane/test_output
+
+# --------
+# Realm（開発時にローカルDBを置く場合に備えて）
+# --------
+*.realm
+*.realm.lock
+*.realm.note
+*.realm.management/
+
+# --------
+# その他一時ファイル
+# --------
+*.swp
+*.tmp
+*.log
+
+.swiftlint_cache
+

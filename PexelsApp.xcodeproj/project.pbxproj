@@ -6,6 +6,12 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		058593D02E4DA9F200C72DF6 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 058593CF2E4DA9F200C72DF6 /* Kingfisher */; };
+		058593D32E4DAA0300C72DF6 /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = 058593D22E4DAA0300C72DF6 /* ComposableArchitecture */; };
+		058593D52E4DABEE00C72DF6 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 058593D42E4DABEA00C72DF6 /* .gitignore */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		058593B22E4DA2CE00C72DF6 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -27,6 +33,7 @@
 		058593A42E4DA2CD00C72DF6 /* PexelsApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PexelsApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		058593B12E4DA2CE00C72DF6 /* PexelsAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PexelsAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		058593BB2E4DA2CE00C72DF6 /* PexelsAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PexelsAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		058593D42E4DABEA00C72DF6 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -52,6 +59,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				058593D32E4DAA0300C72DF6 /* ComposableArchitecture in Frameworks */,
+				058593D02E4DA9F200C72DF6 /* Kingfisher in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -75,6 +84,7 @@
 		0585939B2E4DA2CD00C72DF6 = {
 			isa = PBXGroup;
 			children = (
+				058593D42E4DABEA00C72DF6 /* .gitignore */,
 				058593A62E4DA2CD00C72DF6 /* PexelsApp */,
 				058593B42E4DA2CE00C72DF6 /* PexelsAppTests */,
 				058593BE2E4DA2CE00C72DF6 /* PexelsAppUITests */,
@@ -112,6 +122,8 @@
 			);
 			name = PexelsApp;
 			packageProductDependencies = (
+				058593CF2E4DA9F200C72DF6 /* Kingfisher */,
+				058593D22E4DAA0300C72DF6 /* ComposableArchitecture */,
 			);
 			productName = PexelsApp;
 			productReference = 058593A42E4DA2CD00C72DF6 /* PexelsApp.app */;
@@ -195,6 +207,10 @@
 			);
 			mainGroup = 0585939B2E4DA2CD00C72DF6;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				058593CE2E4DA9F200C72DF6 /* XCRemoteSwiftPackageReference "Kingfisher" */,
+				058593D12E4DAA0300C72DF6 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 058593A52E4DA2CD00C72DF6 /* Products */;
 			projectDirPath = "";
@@ -212,6 +228,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				058593D52E4DABEE00C72DF6 /* .gitignore in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -405,6 +422,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -433,6 +451,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -454,7 +473,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 56D5SSHUHW;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 18.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.sokuma.PexelsAppTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -473,7 +492,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 56D5SSHUHW;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 18.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.sokuma.PexelsAppTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -491,6 +510,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 56D5SSHUHW;
 				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.sokuma.PexelsAppUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -508,6 +528,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 56D5SSHUHW;
 				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.sokuma.PexelsAppUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -558,6 +579,38 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		058593CE2E4DA9F200C72DF6 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 8.5.0;
+			};
+		};
+		058593D12E4DAA0300C72DF6 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/pointfreeco/swift-composable-architecture";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.21.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		058593CF2E4DA9F200C72DF6 /* Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 058593CE2E4DA9F200C72DF6 /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = Kingfisher;
+		};
+		058593D22E4DAA0300C72DF6 /* ComposableArchitecture */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 058593D12E4DAA0300C72DF6 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */;
+			productName = ComposableArchitecture;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 0585939C2E4DA2CD00C72DF6 /* Project object */;
 }
