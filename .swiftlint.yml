@@ -1,0 +1,19 @@
+disabled_rules:
+  - trailing_whitespace
+  - force_cast
+  - force_unwrapping
+  - line_length
+
+opt_in_rules:
+  - explicit_init
+
+included:
+  - PexelsApp
+  - PexelsAppTests
+  - PexelsAppUITests
+
+excluded:
+  - DerivedData
+  - .build
+  - Carthage
+

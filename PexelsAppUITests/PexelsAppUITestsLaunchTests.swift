@@ -1,7 +1,6 @@
 import XCTest
 
 final class PexelsAppUITestsLaunchTests: XCTestCase {
-
     override class var runsForEachTargetApplicationUIConfiguration: Bool {
         true
     }

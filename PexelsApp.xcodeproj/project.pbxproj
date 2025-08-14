@@ -10,6 +10,8 @@
 		058593D02E4DA9F200C72DF6 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 058593CF2E4DA9F200C72DF6 /* Kingfisher */; };
 		058593D32E4DAA0300C72DF6 /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = 058593D22E4DAA0300C72DF6 /* ComposableArchitecture */; };
 		058593D52E4DABEE00C72DF6 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 058593D42E4DABEA00C72DF6 /* .gitignore */; };
+		058593EF2E4DADD900C72DF6 /* .swiftformat in Resources */ = {isa = PBXBuildFile; fileRef = 058593EE2E4DADCC00C72DF6 /* .swiftformat */; };
+		058593F12E4DADEB00C72DF6 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 058593F02E4DADEA00C72DF6 /* .swiftlint.yml */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -34,6 +36,8 @@
 		058593B12E4DA2CE00C72DF6 /* PexelsAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PexelsAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		058593BB2E4DA2CE00C72DF6 /* PexelsAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PexelsAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		058593D42E4DABEA00C72DF6 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
+		058593EE2E4DADCC00C72DF6 /* .swiftformat */ = {isa = PBXFileReference; lastKnownFileType = text; path = .swiftformat; sourceTree = "<group>"; };
+		058593F02E4DADEA00C72DF6 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -84,6 +88,8 @@
 		0585939B2E4DA2CD00C72DF6 = {
 			isa = PBXGroup;
 			children = (
+				058593F02E4DADEA00C72DF6 /* .swiftlint.yml */,
+				058593EE2E4DADCC00C72DF6 /* .swiftformat */,
 				058593D42E4DABEA00C72DF6 /* .gitignore */,
 				058593A62E4DA2CD00C72DF6 /* PexelsApp */,
 				058593B42E4DA2CE00C72DF6 /* PexelsAppTests */,
@@ -112,6 +118,8 @@
 				058593A02E4DA2CD00C72DF6 /* Sources */,
 				058593A12E4DA2CD00C72DF6 /* Frameworks */,
 				058593A22E4DA2CD00C72DF6 /* Resources */,
+				058593F22E4DAE9F00C72DF6 /* ShellScript */,
+				058593F32E4DAEBB00C72DF6 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -228,7 +236,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				058593F12E4DADEB00C72DF6 /* .swiftlint.yml in Resources */,
 				058593D52E4DABEE00C72DF6 /* .gitignore in Resources */,
+				058593EF2E4DADD900C72DF6 /* .swiftformat in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -247,6 +257,43 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		058593F22E4DAE9F00C72DF6 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# ===== SwiftFormat =====\n# パス解決（/opt/homebrew or /usr/local）\nif [ -x /opt/homebrew/bin/swiftformat ]; then\n  SWIFTFORMAT=/opt/homebrew/bin/swiftformat\nelif [ -x /usr/local/bin/swiftformat ]; then\n  SWIFTFORMAT=/usr/local/bin/swiftformat\nelse\n  echo \"SwiftFormat not found. Skipping.\"\n  exit 0\nfi\n\n# Debug のときだけ整形（本番ビルドでソースを書き換えないため）\nif [ \"$CONFIGURATION\" = \"Debug\" ]; then\n  echo \"Running SwiftFormat...\"\n  \"$SWIFTFORMAT\" \"$SRCROOT\" --config \"$SRCROOT/.swiftformat\" || true\nfi\n";
+		};
+		058593F32E4DAEBB00C72DF6 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# ===== SwiftLint =====\nif [ -x /opt/homebrew/bin/swiftlint ]; then\n  SWIFTLINT=/opt/homebrew/bin/swiftlint\nelif [ -x /usr/local/bin/swiftlint ]; then\n  SWIFTLINT=/usr/local/bin/swiftlint\nelse\n  echo \"SwiftLint not found. Skipping.\"\n  exit 0\nfi\n\necho \"Running SwiftLint...\"\n\"$SWIFTLINT\" --config \"$SRCROOT/.swiftlint.yml\" || true\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		058593A02E4DA2CD00C72DF6 /* Sources */ = {
@@ -324,7 +371,7 @@
 				DEVELOPMENT_TEAM = 56D5SSHUHW;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -388,7 +435,7 @@
 				DEVELOPMENT_TEAM = 56D5SSHUHW;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;

@@ -1,0 +1,6 @@
+--indent 4
+--allman false
+--stripunusedargs closure-only
+--wraparguments before-first
+--wrapcollections before-first
+--self remove
