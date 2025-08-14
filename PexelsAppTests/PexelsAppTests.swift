@@ -1,10 +1,3 @@
-//
-//  PexelsAppTests.swift
-//  PexelsAppTests
-//
-//  Created by 太田修平 on 2025/08/14.
-//
-
 import Testing
 @testable import PexelsApp
 
