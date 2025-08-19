@@ -1,10 +1,15 @@
+import ComposableArchitecture
 import SwiftUI
 
 @main
 struct PexelsAppApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            PhotosView(
+                store: Store(initialState: PhotosFeature.State()) {
+                    PhotosFeature()
+                }
+            )
         }
     }
 }
