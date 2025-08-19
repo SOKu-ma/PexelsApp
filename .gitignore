@@ -156,3 +156,5 @@ fastlane/test_output
 
 .swiftlint_cache
 
+# xcconfig (本番用は管理外にする)
+Config/Production.xcconfig
