@@ -7,19 +7,21 @@ struct PhotosView: View {
     var body: some View {
         NavigationStack {
             listContent
-                .overlay {
-                    if store.isLoading {
-                        ProgressView()
-                            .progressViewStyle(CircularProgressViewStyle())
-                            .padding()
-                            .frame(maxWidth: .infinity, maxHeight: .infinity)
-                    }
-                }
+                .overlay { progressView }
                 .navigationTitle(Text("Photos"))
                 .padding(.top, 8)
                 .padding(.bottom, 8)
                 .task {
                     store.send(.onAppear)
+                }
+                .navigationDestination(for: URL.self) { url in
+                    FullScreenImageView(
+                        store: Store(
+                            initialState: FullScreenImageFeature.State(url: url))
+                        {
+                            FullScreenImageFeature()
+                        }
+                    )
                 }
                 .searchable(
                     text: Binding(
@@ -34,6 +36,7 @@ struct PhotosView: View {
     @ViewBuilder
     private var listContent: some View {
         ScrollView {
+            // TODO リスト表示とグリッド表示を切り替えられるようにする
 //            LazyVStack {
 //                ForEach(store.photos) { photo in
 //                    PhotoRowView(photo: photo)
@@ -43,13 +46,25 @@ struct PhotosView: View {
 //            }
             LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: 4), count: 2), spacing: 4) {
                 ForEach(store.photos) { photo in
-                    GridRow {
-                        PhotoRowView(photo: photo)
-                            .background(Color.white)
-                            .cornerRadius(8)
+                    NavigationLink(value: photo.urls.original) {
+                        GridRow {
+                            PhotoRowView(photo: photo)
+                                .background(Color.white)
+                                .cornerRadius(8)
+                        }
                     }
                 }
             }
+        }
+    }
+
+    @ViewBuilder
+    private var progressView: some View {
+        if store.isLoading {
+            ProgressView()
+                .progressViewStyle(CircularProgressViewStyle())
+                .padding()
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
         }
     }
 }
