@@ -34,46 +34,44 @@ struct PhotosView: View {
     @ViewBuilder
     private var listContent: some View {
         ScrollView {
-            // TODO: リスト表示とグリッド表示を切り替えられるようにする予定
             LazyVStack(spacing: 0) {
                 ForEach(Array(store.displayRows.enumerated()), id: \.element.id) { index, photo in
                     NavigationLink(value: photo.urls.original) {
                         PhotoRowView(photo: photo)
                             .background(Color(.systemBackground))
+                            .shadow(color: .black.opacity(0.1), radius: 2, x: 0, y: 1)
                     }
                     .buttonStyle(PlainButtonStyle())
                     .onAppear {
-                        if index >= store.displayRows.count - 3 {
+                        if index >= store.displayRows.count - 5 && !store.isLoadingMore {
                             store.send(.loadMorePhotos)
                         }
                     }
                 }
+
+                if store.isLoadingMore {
+                    HStack {
+                        ProgressView()
+                            .progressViewStyle(CircularProgressViewStyle(tint: .primary))
+                        Text("Loading more photos...")
+                            .font(.caption)
+                            .foregroundColor(.secondary)
+                    }
+                }
             }
-//            LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: 4), count: 2), spacing: 4) {
-//                ForEach(Array(store.displayRows.enumerated()), id: \.element.id) { index, photo in
-//                    NavigationLink(value: photo.urls.original) {
-//                        GridRow {
-//                            PhotoRowView(photo: photo)
-//                                .background(Color.white)
-//                                .cornerRadius(8)
-//                        }
-//                    }
-//                    .onAppear {
-//                        if index >= store.displayRows.count - 3 {
-//                            store.send(.loadMorePhotos)
-//                        }
-//                    }
-//                }
-//            }
+        }
+        .refreshable {
+            store.send(.loadPhotos)
         }
     }
 
     @ViewBuilder
     private var progressView: some View {
-        if store.isLoading {
+        if store.isLoading && store.displayRows.isEmpty {
             ProgressView()
                 .progressViewStyle(CircularProgressViewStyle())
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
+                .background(Color(.systemBackground))
         }
     }
 }

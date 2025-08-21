@@ -27,6 +27,7 @@ struct PhotosFeature {
         case photosLoadedMore([Photo])
         case searchPhotos(String)
         case photosSearched([Photo])
+        case photosSearchedMore([Photo])
     }
 
     var body: some ReducerOf<Self> {
@@ -51,12 +52,21 @@ struct PhotosFeature {
                 }
 
             case .loadPhotos:
-                return .none
-
-            case .loadMorePhotos:
-                guard !state.isLoadingMore else { return .none }
+                guard !state.isLoading else { return .none }
 
                 state.isLoading = true
+                return .run { send in
+                    do {
+                        let list = try await loadPhotosUseCase()
+                        await send(.photosLoaded(list))
+                    } catch {
+                        print("Error loading Photos: \(error)")
+                    }
+                }
+
+            case .loadMorePhotos:
+                guard !state.isLoadingMore && !state.isLoading else { return .none }
+
                 state.isLoadingMore = true
 
                 // 通常モード
@@ -78,7 +88,7 @@ struct PhotosFeature {
                     return .run { send in
                         do {
                             let list = try await loadPhotosUseCase.search(query: searchQuery, page: nextPage)
-                            await send(.photosSearched(list))
+                            await send(.photosSearchedMore(list))
                         } catch {
                             print("Failed to load more search results: \(error)")
                         }
@@ -86,7 +96,6 @@ struct PhotosFeature {
                 }
 
             case let .photosLoadedMore(list):
-                state.isLoading = false
                 state.isLoadingMore = false
                 state.photos.append(contentsOf: list)
                 return .none
@@ -105,12 +114,13 @@ struct PhotosFeature {
                     return .none
                 }
 
+                // 検索時は既存の結果をクリアしてからローディング開始
+                state.filterdPhotos = []
                 state.isLoading = true
 
-                let page = state.filterdPhotos.count / 15 + 1
                 return .run { send in
                     do {
-                        let list = try await loadPhotosUseCase.search(query: query, page: page)
+                        let list = try await loadPhotosUseCase.search(query: query, page: 1)
                         await send(.photosSearched(list))
                     } catch {
                         print("Failed to search photos list: \(error)")
@@ -121,6 +131,11 @@ struct PhotosFeature {
                 state.isLoading = false
                 state.isLoadingMore = false
                 state.filterdPhotos = result
+                return .none
+
+            case let .photosSearchedMore(result):
+                state.isLoadingMore = false
+                state.filterdPhotos.append(contentsOf: result)
                 return .none
             }
         }
