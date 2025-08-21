@@ -14,11 +14,13 @@ public class PhotosRepositoryImpl: PhotosRepositoryProtocol {
         return response.photos.map { mapper.fromDetail($0) }
     }
 
-    func fetchPhotos(page: Int, perPage: Int) async throws -> [Photo] {
-        return []
+    func fetchPhotos(page: Int) async throws -> [Photo] {
+//        print("page: \(page)")
+        let response: SearchPhotosResponseDTO = try await apiClient.get(path: APIPath.popularPhotos, queryItems: [URLQueryItem(name: "page", value: "\(page)")])
+        return response.photos.map { mapper.fromDetail($0) }
     }
 
-    func searchPhotos(query: String, page: Int, perPage: Int) async throws -> [Photo] {
+    func searchPhotos(query: String, page: Int) async throws -> [Photo] {
         return []
     }
 }

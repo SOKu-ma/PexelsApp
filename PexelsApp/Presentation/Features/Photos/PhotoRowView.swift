@@ -9,7 +9,6 @@ struct PhotoRowView: View {
             KFImage(photo.urls.original)
                 .resizable()
                 .aspectRatio(contentMode: .fill)
-                .frame(width: 200, height: 200)
                 .cornerRadius(8)
         }
     }

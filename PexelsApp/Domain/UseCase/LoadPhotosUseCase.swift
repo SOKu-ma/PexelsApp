@@ -10,12 +10,13 @@ public struct LoadPhotosUseCase {
         try await repository.fetchPhotos()
     }
 
-    public func callAsFunction(page: Int, perPage: Int) async throws -> [Photo] {
-        try await repository.fetchPhotos()
+    // 写真一覧をページネーションで取得する
+    public func callAsFunction(page: Int) async throws -> [Photo] {
+        try await repository.fetchPhotos(page: page)
     }
 
     // 写真を検索する
-    public func search(query: String, page: Int, perPage: Int) async throws -> [Photo] {
-        try await repository.searchPhotos(query: query, page: page, perPage: perPage)
+    public func search(query: String, page: Int) async throws -> [Photo] {
+        try await repository.searchPhotos(query: query, page: page)
     }
 }

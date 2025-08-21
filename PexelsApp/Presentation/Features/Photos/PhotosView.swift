@@ -11,7 +11,7 @@ struct PhotosView: View {
                 .navigationTitle(Text("Photos"))
                 .padding(.top, 8)
                 .padding(.bottom, 8)
-                .task {
+                .onAppear {
                     store.send(.onAppear)
                 }
                 .navigationDestination(for: URL.self) { url in
@@ -36,25 +36,37 @@ struct PhotosView: View {
     @ViewBuilder
     private var listContent: some View {
         ScrollView {
-            // TODO リスト表示とグリッド表示を切り替えられるようにする
-//            LazyVStack {
-//                ForEach(store.photos) { photo in
-//                    PhotoRowView(photo: photo)
-//                        .background(Color.white)
-//                        .cornerRadius(8)
-//                }
-//            }
-            LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: 4), count: 2), spacing: 4) {
-                ForEach(store.photos) { photo in
+            // TODO: リスト表示とグリッド表示を切り替えられるようにする予定
+            LazyVStack {
+                ForEach(Array(store.displayRows.enumerated()), id: \.element.id) { index, photo in
                     NavigationLink(value: photo.urls.original) {
-                        GridRow {
-                            PhotoRowView(photo: photo)
-                                .background(Color.white)
-                                .cornerRadius(8)
+                        PhotoRowView(photo: photo)
+                            .background(Color.white)
+                            .cornerRadius(8)
+                    }
+                    .onAppear {
+                        if index >= store.displayRows.count - 3 {
+                            store.send(.loadMorePhotos)
                         }
                     }
                 }
             }
+//            LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: 4), count: 2), spacing: 4) {
+//                ForEach(Array(store.displayRows.enumerated()), id: \.element.id) { index, photo in
+//                    NavigationLink(value: photo.urls.original) {
+//                        GridRow {
+//                            PhotoRowView(photo: photo)
+//                                .background(Color.white)
+//                                .cornerRadius(8)
+//                        }
+//                    }
+//                    .onAppear {
+//                        if index >= store.displayRows.count - 3 {
+//                            store.send(.loadMorePhotos)
+//                        }
+//                    }
+//                }
+//            }
         }
     }
 

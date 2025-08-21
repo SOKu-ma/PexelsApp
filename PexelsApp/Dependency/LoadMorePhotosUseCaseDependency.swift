@@ -2,13 +2,13 @@ import Dependencies
 import Foundation
 
 extension DependencyValues {
-    var loadPhotos: LoadPhotosUseCase {
-        get { self[LoadPhotosKey.self] }
-        set { self[LoadPhotosKey.self] = newValue }
+    var loadMorePhotos: LoadPhotosUseCase {
+        get { self[LoadMorePhotosKey.self] }
+        set { self[LoadMorePhotosKey.self] = newValue }
     }
 }
 
-private enum LoadPhotosKey: DependencyKey {
+private enum LoadMorePhotosKey: DependencyKey {
     static let liveValue: LoadPhotosUseCase = {
         let apiClient = APIClient(baseURL: URL(string: APIEndpoints.baseURL)!)
         let repository = PhotosRepositoryImpl(apiClient: apiClient, mapper: PhotosMapper())

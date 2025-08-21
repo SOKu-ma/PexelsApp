@@ -27,13 +27,8 @@ struct APIClient: APIClientProtocol {
         request.httpMethod = "GET"
         request.setValue(apiKey, forHTTPHeaderField: "Authorization")
 
-//        print("Request URL: \(url)")
-//        print("Request Headers: \(request.allHTTPHeaderFields ?? [:])")
-//        print("apiKey: \(apiKey)")
-
         // 通信
         let (data, response) = try await URLSession.shared.data(for: request)
-//        print(String(data: data, encoding: .utf8) ?? "non-utf8")
 
         // ステータスコードチェック
         guard let http = response as? HTTPURLResponse,
@@ -45,7 +40,6 @@ struct APIClient: APIClientProtocol {
 
         // デコード
         let decoder = JSONDecoder()
-//        decoder.keyDecodingStrategy = .convertFromSnakeCase
 
         do {
             return try decoder.decode(T.self, from: data)
