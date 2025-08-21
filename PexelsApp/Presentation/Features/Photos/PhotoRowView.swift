@@ -5,12 +5,11 @@ struct PhotoRowView: View {
     let photo: Photo
 
     var body: some View {
-        HStack {
-            KFImage(photo.urls.original)
-                .resizable()
-                .aspectRatio(contentMode: .fill)
-                .cornerRadius(8)
-        }
+        KFImage(photo.urls.original)
+            .resizable()
+            .aspectRatio(contentMode: .fill)
+            .frame(maxWidth: .infinity)
+            .clipped()
     }
 }
 

@@ -97,13 +97,14 @@ struct PhotosFeature {
                 return .none
 
             case let .searchPhotos(query):
+                state.searchText = query
+
                 if query.isEmpty {
                     // 検索テキストが空の場合は通常のリストに戻る
                     state.filterdPhotos = []
                     return .none
                 }
 
-                state.searchText = query
                 state.isLoading = true
 
                 let page = state.filterdPhotos.count / 15 + 1

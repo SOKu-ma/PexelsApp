@@ -9,8 +9,6 @@ struct PhotosView: View {
             listContent
                 .overlay { progressView }
                 .navigationTitle(Text("Photos"))
-                .padding(.top, 8)
-                .padding(.bottom, 8)
                 .onAppear {
                     store.send(.onAppear)
                 }
@@ -37,13 +35,13 @@ struct PhotosView: View {
     private var listContent: some View {
         ScrollView {
             // TODO: リスト表示とグリッド表示を切り替えられるようにする予定
-            LazyVStack {
+            LazyVStack(spacing: 0) {
                 ForEach(Array(store.displayRows.enumerated()), id: \.element.id) { index, photo in
                     NavigationLink(value: photo.urls.original) {
                         PhotoRowView(photo: photo)
-                            .background(Color.white)
-                            .cornerRadius(8)
+                            .background(Color(.systemBackground))
                     }
+                    .buttonStyle(PlainButtonStyle())
                     .onAppear {
                         if index >= store.displayRows.count - 3 {
                             store.send(.loadMorePhotos)
@@ -75,7 +73,6 @@ struct PhotosView: View {
         if store.isLoading {
             ProgressView()
                 .progressViewStyle(CircularProgressViewStyle())
-                .padding()
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
         }
     }
