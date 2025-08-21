@@ -4,6 +4,11 @@ import ComposableArchitecture
 struct PhotosFeature {
     @Dependency(\.loadPhotos) private var loadPhotosUseCase
 
+    enum DisplayMode: Equatable {
+        case singleColumn
+        case doubleColumn
+    }
+
     @ObservableState
     struct State: Equatable {
         var photos: [Photo] = []
@@ -12,6 +17,7 @@ struct PhotosFeature {
         var searchText: String = ""
         var filterdPhotos: [Photo] = []
         var hasAppeared: Bool = false
+        var displayMode: DisplayMode = .singleColumn
 
         // 検索結果 or 通常のリストを表示するためのプロパティ
         var displayRows: [Photo] {
@@ -28,6 +34,7 @@ struct PhotosFeature {
         case searchPhotos(String)
         case photosSearched([Photo])
         case photosSearchedMore([Photo])
+        case toggleDisplayMode
     }
 
     var body: some ReducerOf<Self> {
@@ -136,6 +143,10 @@ struct PhotosFeature {
             case let .photosSearchedMore(result):
                 state.isLoadingMore = false
                 state.filterdPhotos.append(contentsOf: result)
+                return .none
+
+            case .toggleDisplayMode:
+                state.displayMode = state.displayMode == .singleColumn ? .doubleColumn : .singleColumn
                 return .none
             }
         }

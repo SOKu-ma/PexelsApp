@@ -3,9 +3,14 @@ import SwiftUI
 
 struct PhotoRowView: View {
     let photo: Photo
+    var isGridMode: Bool = false
 
     private var imageWidth: CGFloat {
-        UIScreen.main.bounds.width
+        if isGridMode {
+            return (UIScreen.main.bounds.width) / 2
+        } else {
+            return UIScreen.main.bounds.width
+        }
     }
 
     private var imageHeight: CGFloat {
