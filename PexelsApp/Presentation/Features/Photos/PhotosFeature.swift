@@ -72,7 +72,7 @@ struct PhotosFeature {
                     }
                 } else {
                     // 検索モード
-                    let nextPage = state.filterdPhotos.count / 10 + 1
+                    let nextPage = state.filterdPhotos.count / 15 + 1
 
                     let searchQuery = state.searchText
                     return .run { send in
@@ -97,9 +97,29 @@ struct PhotosFeature {
                 return .none
 
             case let .searchPhotos(query):
-                return .none
+                if query.isEmpty {
+                    // 検索テキストが空の場合は通常のリストに戻る
+                    state.filterdPhotos = []
+                    return .none
+                }
+
+                state.searchText = query
+                state.isLoading = true
+
+                let page = state.filterdPhotos.count / 15 + 1
+                return .run { send in
+                    do {
+                        let list = try await loadPhotosUseCase.search(query: query, page: page)
+                        await send(.photosSearched(list))
+                    } catch {
+                        print("Failed to search photos list: \(error)")
+                    }
+                }
 
             case let .photosSearched(result):
+                state.isLoading = false
+                state.isLoadingMore = false
+                state.filterdPhotos = result
                 return .none
             }
         }

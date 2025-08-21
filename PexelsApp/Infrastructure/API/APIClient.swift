@@ -27,6 +27,9 @@ struct APIClient: APIClientProtocol {
         request.httpMethod = "GET"
         request.setValue(apiKey, forHTTPHeaderField: "Authorization")
 
+        print("Request URL: \(url)")
+        print("Request Headers: \(request.allHTTPHeaderFields ?? [:])")
+
         // 通信
         let (data, response) = try await URLSession.shared.data(for: request)
 
@@ -49,36 +52,3 @@ struct APIClient: APIClientProtocol {
         }
     }
 }
-
-// import Foundation
-//
-// struct APIClient: APIClientProtocol {
-//    let baseURL: String
-//
-//    init(baseURL: String = APIEndpoints.baseURL) {
-//        self.baseURL = baseURL
-//    }
-//
-//    func get<T: Decodable>(path: String) async throws -> T {
-//        guard let url = URL(string: path) else {
-//            throw URLError(.badURL)
-//        }
-//
-//        let (data, response) = try await URLSession.shared.data(from: url)
-//
-//        guard let http = response as? HTTPURLResponse, (200 ..< 300).contains(http.statusCode) else {
-//            print("Bad Server Response - Status Code: \((response as? HTTPURLResponse)?.statusCode ?? -1)")
-//            throw URLError(.badServerResponse)
-//        }
-//
-//        let decoder = JSONDecoder()
-//        decoder.keyDecodingStrategy = .convertFromSnakeCase
-//
-//        do {
-//            return try decoder.decode(T.self, from: data)
-//        } catch {
-//            print("Decoding error: \(error)")
-//            throw error
-//        }
-//    }
-// }
